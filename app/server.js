@@ -1,3 +1,5 @@
+const { allRouters } = require("./router/router");
+
 module.exports = class Application {
   #express = require("express");
   #app = this.#express();
@@ -33,6 +35,7 @@ module.exports = class Application {
     this.#app.get("/", (req, res, next) => {
       return res.json({ message: " this is main page of project manager " });
     });
+    this.#app.use(allRouters);
   }
   errorHandler() {
     this.#app.use((req, res, next) => {
@@ -41,6 +44,11 @@ module.exports = class Application {
         success: false,
         message: "the page not found",
       });
+    });
+    this.#app.use((error, req, res, next) => {
+      const status = error?.status || 500;
+      const message = error?.message || "InternalServerMessage";
+      return res.status(status).json({ status, message, success: false });
     });
   }
 };
