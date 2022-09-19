@@ -1,0 +1,9 @@
+### post sign-up
+POST http://localhost:3000/auth/sign-up
+
+{
+    "username" : "",
+    "email" : "",
+    "mobile" : "",
+    "password" : "",
+}

@@ -6,10 +6,10 @@ const userSchema = new mongoose.Schema(
     username: { type: String, require: true, unique: true },
     mobile: { type: String, require: true, unique: true },
     email: { type: String, require: true, unique: true },
-    roles: { type: String, default: ["USERS"] },
+    roles: { type: [String], default: ["USERS"] },
     password: { type: String, required: true },
-    skills: { type: String, default: [] },
-    teams: { type: String, default: [] },
+    skills: { type: [String], default: [] },
+    teams: { type: [mongoose.Types.ObjectId], default: [] },
   },
   {
     timestamps: true,
